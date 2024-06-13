@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #BD462A;
+    text-align: center;
+}
+
+h1 {
+    color: #000000;
+}
+
+p {
+    color: #BD462A;
+}
+
+header {
+    background-color: #BD462A; /* Taustaväri */
+    padding: 10px; /* Sisennys ylä- ja alareunoista */
+    display: flex; /* Joustava rivi-elementti */
+    align-items: center; /* Keskusta sisältö pystysuunnassa */
+}
+
+.logo img {
+    height: 100px; /* Logon korkeus */
+    margin-right: 200px; /* Lisätty tila logon ja navigointivalikon välille */
+}
+
+nav ul {
+    list-style-type: none; /* Poista luettelomerkit */
+    margin: 0; /* Poista marginaalit */
+    padding: 0; /* Poista sisennys */
+    display: flex; /* Joustava rivi-elementti */
+}
+
+nav ul li {
+    margin-right: 50px; /* Sisennys nav-linkien välillä */
+}
+
+nav ul li a {
+    color: white; /* Tekstin väri */
+    text-decoration: none; /* Poista korostus */
+    position: relative; /* Suhteellinen sijainti */
+    font-size: 18px; /* Tekstin koko */
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Viivan sijainti alhaalla */
+    width: 100%; /* Viivan leveys */
+    height: 2px; /* Viivan paksuus */
+    background-color: white; /* Viivan väri */
+    transition: transform 0.3s ease-in-out; /* Sulava muutos */
+    transform: scaleX(1); /* Näytä viiva */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 200px); /* Vähennetään 200 pikseliä navigointivalikon korkeudesta */
+    padding-top: 50px; /* 50 pikseliä tilaa navigointivalikolle ylhäältä */
+}
+
+.white-box {
+    background-color: white;
+    border-radius: 15px; /* Pyöreät reunat */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: calc(100% - 40px); /* Leveys 100% - 40 pikseliä (20 pikseliä padding kummallakin puolella) */
+    max-width: 800px; /* Enintään 800 pikseliä leveä */
+    height: calc(100% - 100px); /* Korkeus, vähennetään 100 pikseliä navigointivalikon korkeudesta */
+    max-height: calc(100vh - 150px); /* Enintään 100 vh - 150 pikseliä korkea */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+}
+
+.button {
+    display: inline-block;
+    background-color: #BD462A;
+    color: #FFFEFE;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    width: auto; /* Napin leveys automaattiseksi */
+}
+
+.button:hover {
+    background-color: #BD462A;
+}

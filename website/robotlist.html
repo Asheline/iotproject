@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centralized ROS-server | Robot List Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: white;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #BD462A;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 150px; 
+            height: 100; /* Säilyttää kuvansuhteen oikein */
+            vertical-align: middle;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+            position: relative;
+        }
+
+        nav ul li:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            bottom: -5px;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        nav ul li:hover:after {
+            opacity: 1;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="checkbox"] {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transform: scale(1.5);
+        }
+
+        .view-data-button {
+            padding: 8px 16px;
+            background-color: #BD462A;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .status-icon {
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .on {
+            color: green;
+        }
+
+        .off {
+            color: red;
+        }
+        .status-icon.on::before {
+            content: "\f058"; /* FontAwesome icon code for filled circle */
+        }
+
+        .status-icon.off::before {
+            content: "\f057"; /* FontAwesome icon code for outlined circle */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img id="logoImage" src="images/RB_logo1.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="robotlist.html">Robot List</a></li>
+                <li><a href="https://www.ros.org/">ROS</a></li>
+                <li><a href="aboutcrs.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>Robot List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Robot</th>
+                    <th>ROS-version</th>
+                    <th>On/Off</th>
+                    <th>View Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Yahboom Rosmaster X3</td>
+                    <td>ROS 2</td>
+                    <td><input type="checkbox"></td>
+                    <td><a href="yahboomrm.html" class="view-data-button">View Data</a></td>
+                </tr>                
+                <tr>
+                    <td>Mini-ATV [NOT CONNECTED]</td>
+                    <td>ROS 1</td>
+                    <td><input type="checkbox"></td>
+                    <td><button class="view-data-button">View Data</button></td>
+                </tr>
+                <tr>
+                    <td>Big-ATV [NOT CONNECTED]</td>
+                    <td>ROS 1</td>
+                    <td><input type="checkbox"></td>
+                    <td><button class="view-data-button">View Data</button></td>
+                </tr>
+                <tr>
+                    <td>Snower [NOT CONNECTED]</td>
+                    <td>ROS 1</td>
+                    <td><input type="checkbox"></td>
+                    <td><button class="view-data-button">View Data</button></td>
+                </tr>
+                <tr>
+                    <td>Yahboom Rosmaster X3 Pro [NOT CONNECTED]</td>
+                    <td>ROS 2</td>
+                    <td><input type="checkbox"></td>
+                    <td><button class="view-data-button">View Data</button></td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+
+        <p>Here you can see the list of the current robots available in the Centralized ROS-server. You can check the robots name, ROS-version and current activity status from the table.</p>
+        <p>By pressing "View Data" you will be able to view selected robots data in real-time.</p>
+    </div>
+    
+    <script>
+        // Scripti taulukon elementtien muuttamiseen aakkosjärjestykseen
+        window.onload = function() {
+            // Haetaan taulukko
+            var table = document.querySelector('table');
+
+            // Haetaan taulukon tbody
+            var tbody = table.querySelector('tbody');
+
+            // Haetaan kaikki rivit
+            var rows = tbody.querySelectorAll('tr');
+
+            // Luodaan tyhjä taulukko nimille
+            var names = [];
+
+            // Käydään läpi jokainen rivi ja lisätään nimi taulukkoon
+            rows.forEach(function(row) {
+                var nameCell = row.querySelector('td:first-child');
+                var name = nameCell.textContent.trim();
+                names.push({ name: name, row: row });
+            });
+
+            // Järjestetään nimet aakkosjärjestykseen
+            names.sort(function(a, b) {
+                return a.name.localeCompare(b.name);
+            });
+
+            // Tyhjennetään tbody
+            tbody.innerHTML = '';
+
+            // Lisätään rivit takaisin järjestetyssä järjestyksessä
+            names.forEach(function(item) {
+                tbody.appendChild(item.row);
+            });
+
+            // Käydään läpi jokainen rivi ja lisätään tila osoittava elementti
+            rows.forEach(function(row) {
+                var statusCell = row.querySelector('td:nth-child(3)');
+                var status = statusCell.textContent.trim();
+
+                var icon = document.createElement('i');
+                icon.classList.add('status-icon', status === 'On' ? 'on' : 'off', 'fas');
+
+                statusCell.textContent = ''; // Tyhjennetään solu
+                statusCell.appendChild(icon);
+            });
+            
+            document.getElementById('logoImage').addEventListener('click', function() {
+            // Ohjataan sivu index.html:ään
+            window.location.href = 'index.html';
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centralized ROS-server | About Centralized ROS-Server Page</title>
+    <style>
+        body {
+            background-color: white; /* Sivuston tausta valkoinen */
+            color: #333; /* Tekstin väri */
+            font-family: Arial, sans-serif; /* Fontti */
+            margin: 0; /* Poistaa sivun marginaalit */
+            padding: 0; /* Poistaa sivun täytöt */
+        }
+
+        header {
+            background-color: #BD462A; /* Headerin tausta #BD462A */
+            color: white; /* Tekstin väri valkoinen */
+            padding: 20px; /* Lisää tilaa headerin ylä- ja alapuolelle */
+            display: flex; /* Käytä flexboxia elementtien asetteluun */
+            justify-content: space-between; /* Aseta tilaa elementtien välille */
+            align-items: center; /* Keskitä elementit pystysuunnassa */
+        }
+
+        .logo img {
+            max-width: 150px; 
+            height: 100; /* Säilyttää kuvansuhteen oikein */
+            vertical-align: middle;
+        }
+
+        nav ul {
+            list-style-type: none; /* Poista luettelomerkit */
+            margin: 0; /* Poista marginaali */
+            padding: 0; /* Poista täyttö */
+            display: flex; /* Käytä flexboxia elementtien asetteluun */
+        }
+
+        nav ul li {
+            margin-right: 20px; /* Lisää tilaa kohtien välille */
+            position: relative; /* Aseta sijainti suhteelliseksi */
+        }
+
+        nav ul li:after {
+            content: ""; /* Lisää sisältöä */
+            position: absolute; /* Aseta sijainti absoluuttiseksi suhteessa vanhempaan */
+            width: 100%; /* Leveys 100% */
+            height: 2px; /* Korkeus 2 pikseliä */
+            background-color: white; /* Taustaväri valkoinen */
+            bottom: -5px; /* Ylöspäin siirtyminen 5 pikseliä */
+            left: 0; /* Vasemmalle reunalle */
+            opacity: 0; /* Aluksi läpinäkymätön */
+            transition: opacity 0.3s ease; /* Lisää siirtymäominaisuus */
+        }
+
+        nav ul li:hover:after {
+            opacity: 1; /* Tee valkoinen viiva näkyväksi hover-tilassa */
+        }
+
+        nav ul li a {
+            color: white; /* Linkkien väri valkoinen */
+            text-decoration: none; /* Poista alleviivaukset */
+            font-size: 16px; /* Tekstin koko */
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        #chatbox {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 775px; /* Leveys chatboxille */
+            margin-left: 25px;
+            margin-top: 20px; 
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Lisää varjostus efekti */
+        }
+
+        #messageInput {
+        width: 250px; /* Leveys ottaa huomioon marginaalin */
+        margin-left: 25px; /* Etäisyys vasemmasta reunasta */
+        margin-top: 10px; /* Muutama pikseli marginaalia yläpuolelle */
+        padding: 5px;
+        border: 1px solid #ccc;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img id="logoImage" src="images/RB_logo1.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="robotlist.html">Robot List</a></li>
+                <li><a href="https://www.ros.org/">ROS</a></li>
+                <li><a href="aboutcrs.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>Yahboom Rosmaster Robot Data Center</h1>
+        <p>Welcome to Yahboom Rosmaster Robot Data Center! Here you can monitor Yahboom robot's data in real time and give it commands.</p>
+    </div>
+    <div id="chatbox"></div>
+    <input type="text" id="messageInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        document.getElementById('logoImage').addEventListener('click', function() {
+            // Ohjataan sivu index.html:ään
+            window.location.href = 'index.html';
+            });
+    </script>
+</body>
+</html>
